@@ -15,7 +15,6 @@ class TasksController extends Controller
      */
     public function index()
     {
-        //ここがわかってません！！どこにタスクのデータがあるのでしょうか
         $tasks = Task::all();
 
         // タスク一覧ビューでそれを表示
@@ -47,6 +46,11 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
+         // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+        
          // タスクを作成
         $task = new Task;
         $task->content = $request->content;
@@ -98,6 +102,11 @@ class TasksController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+        
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
