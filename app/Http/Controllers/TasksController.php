@@ -34,7 +34,7 @@ class TasksController extends Controller
 
         // タスク作成ビューを表示
         return view('tasks.create', [
-            'task' => $tasks,
+            'task' => $task,
         ]);
     }
 
