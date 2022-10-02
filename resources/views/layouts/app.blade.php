@@ -8,28 +8,15 @@
     </head>
 
     <body>
-        <header class="mb-4">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                {{-- トップページへのリンク --}}
-                <a class="navbar-brand" href="/">Tasklist</a>
+            {{-- ナビゲーションバー --}}
+            @include('commons.navbar')
 
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <div class="container">
+                {{-- エラーメッセージ --}}
+                @include('commons.error_messages')
 
-                <div class="collapse navbar-collapse" id="nav-bar">
-                    <ul class="navbar-nav mr-auto"></ul>
-                    <ul class="navbar-nav">
-                        {{-- タスク登録ページへのリンク --}}
-                        <li class="nav-item">{!! link_to_route('tasks.create', '新規タスクの登録', [], ['class' => 'nav-link']) !!}</li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <div class="container">
-            @yield('content')
-        </div>
+                @yield('content')
+            </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
