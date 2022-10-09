@@ -75,9 +75,9 @@ class TasksController extends Controller
             'status' => $request->status,
             'content' => $request->content,
         ]);
-
-        // 前のURLへリダイレクトさせる
-        return back();
+        
+        // トップページへリダイレクトさせる
+        return redirect('/');
     }
 
     /**
@@ -88,13 +88,19 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-        // idの値でメッセージを検索して取得
-        $task = Task::findOrFail($id);
+        if(\Auth::id() === $tasklist->user_id){
+            // idの値でメッセージを検索して取得
+            $task = Task::findOrFail($id);
 
-        // メッセージ詳細ビューでそれを表示
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+            // メッセージ詳細ビューでそれを表示
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+        }
+        else {
+            // トップページへリダイレクトさせる
+            return redirect('/');
+        }
     }
 
     /**
@@ -105,12 +111,18 @@ class TasksController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::findOrFail($id);
+        if(\Auth::id() === $tasklist->user_id){
+            $task = Task::findOrFail($id);
 
-        // メッセージ編集ビューでそれを表示
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
+            // メッセージ編集ビューでそれを表示
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
+        }
+        else {
+            // トップページへリダイレクトさせる
+            return redirect('/');
+        }
     }
 
     /**
